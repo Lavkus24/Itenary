@@ -1,0 +1,38 @@
+/* Ensure that the navbar height is consistent */
+.navbar {
+    min-height: 65px;
+    top: 0;
+    position: sticky;
+    /* background-color: #fff; Adjust background color as needed */
+    padding: 10px 0; /* Add padding to the navbar */
+    z-index: 1000; 
+}
+
+/* Center the text in the navbar */
+.navbar-text {
+    display: flex;
+    align-items: center;
+    height: 100%;
+}
+
+/* Adjust spacing and alignment of search input and button */
+.form-inline {
+    padding: 10px;
+    display: flex;
+    align-items: center;
+}
+
+.form-control {
+    margin-right: 5px;
+}
+
+.btn {
+    margin-left: 5px;
+}
+.signin {
+    margin-top: 13px;
+    border-radius: 5px;
+    background: none;
+    border: none;
+    font-size: 20px;
+}
