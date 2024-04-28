@@ -13,6 +13,8 @@ import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
 import Typography from '@mui/material/Typography';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import { useNavigate } from 'react-router-dom';
+import { useDispatch } from 'react-redux';
+import { signIn} from '../Redux/Authetication/AuthContextState'
 
 function Copyright(props) {
   return (
@@ -33,21 +35,38 @@ const defaultTheme = createTheme();
 
 export default function SignInSide() {
 
-      
+  const dispatch = useDispatch();
+
   const navigate = useNavigate()
-    
+
   const handleClick = () => {
-      navigate('/SignUp')
-    
+     navigate('/SignUp')
   }
 
-  const handleSubmit = (event) => {
+    
+  const handleSubmit = async (event) => {
     event.preventDefault();
     const data = new FormData(event.currentTarget);
-    console.log({
-      email: data.get('email'),
-      password: data.get('password'),
-    });
+    
+    const email = data.get('email')
+    const password = data.get('password')
+
+    const newData = {name : '', email , password , activity : '' , activityList : []};
+
+    const response = await fetch('http://localhost:3001/login' , {
+        method : 'POST',
+        headers : {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(newData)
+    })
+    
+    // console.log(response.ok)
+    if(response.ok) {
+      dispatch(signIn())
+      navigate('/')
+    }
+    
   };
 
   return (
@@ -110,24 +129,17 @@ export default function SignInSide() {
                 control={<Checkbox value="remember" color="primary" />}
                 label="Remember me"
               />
-              <Button
-                type="submit"
-                fullWidth
-                variant="contained"
-                sx={{ mt: 3, mb: 2 }}
-              >
-                Sign In
-              </Button>
-              <Grid container>
+              <Button type="submit" fullWidth variant="contained" sx={{ mt: 3, mb: 2 }}>Sign In</Button>
+                <Grid container>
                 <Grid item xs>
                   <Link href="#" variant="body2">
                     Forgot password?
                   </Link>
                 </Grid>
                 <Grid item>
-                  <button href="#" variant="body2" onClick={handleClick}>
-                    {"Don't have an account? Sign Up"}
-                  </button>
+                <Button variant="body2" onClick={handleClick}>
+                  {"Don't have an account? Sign Up"}
+                </Button>
                 </Grid>
               </Grid>
               <Copyright sx={{ mt: 5 }} />

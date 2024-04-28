@@ -1,43 +1,50 @@
-import * as React from 'react';
-import Button from '@mui/material/Button';
-import CssBaseline from '@mui/material/CssBaseline';
-import TextField from '@mui/material/TextField';
-import Paper from '@mui/material/Paper';
-import Box from '@mui/material/Box';
-import Grid from '@mui/material/Grid';
-import Typography from '@mui/material/Typography';
+import React from 'react';
+import { Button, CssBaseline, TextField, Paper, Box, Grid, Typography } from '@mui/material';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import { useNavigate } from 'react-router-dom';
-
-
-
-// TODO remove, this demo shouldn't need to reset the theme.
-
 const defaultTheme = createTheme();
 
-export default function SignInSide() {
+const SignInSide = () => {
+  const navigate = useNavigate();
 
-      
-  const navigate = useNavigate()
-    
-  const handleClick = () => {
-      navigate('/')
-    
-  }
-
-  const handleSubmit = (event) => {
+  const handleSubmit = async (event) => {
     event.preventDefault();
+
     const data = new FormData(event.currentTarget);
-    console.log({
-      email: data.get('email'),
-      password: data.get('password'),
-    });
+    const newData = {
+      name: data.get('name'),
+      url: data.get('url'),
+      capacity: data.get('number'), // Corrected field name
+      price: data.get('price'),
+    };
+
+    console.log('newData' , newData)
+    
+
+    try {
+      const response = await fetch('http://localhost:3001/addPlaces', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(newData),
+      });
+
+      if (response.ok) {
+        console.log('Place added successfully');
+        navigate('/'); // Navigate to the desired location after successful addition
+      } else {
+        console.error('Failed to add place');
+      }
+    } catch (error) {
+      console.error('Error:', error);
+      // Handle error
+    }
   };
 
   return (
-
     <ThemeProvider theme={defaultTheme}>
-      <Grid container component="main" sx={{ height: '73vh',display:'flex' , justifyContent:'center'}}>
+      <Grid container component="main" sx={{ height: '73vh', display: 'flex', justifyContent: 'center' }}>
         <CssBaseline />
         <Grid item xs={12} sm={8} md={5} component={Paper} elevation={6} square>
           <Box
@@ -94,9 +101,7 @@ export default function SignInSide() {
                 id="price"
                 autoComplete="price"
               />
-             
-              
-              <Button onClick={handleClick}
+              <Button
                 type="submit"
                 fullWidth
                 variant="contained"
@@ -104,11 +109,12 @@ export default function SignInSide() {
               >
                 ADD PLACES
               </Button>
-             
             </Box>
           </Box>
         </Grid>
       </Grid>
     </ThemeProvider>
   );
-}
+};
+
+export default SignInSide;

@@ -1,5 +1,6 @@
 [
   {
+    "id" : 1,
     "name": "dnf Ship",
     "passenger_capacity": 2000,
     "price": 1500,
@@ -10,6 +11,7 @@
     "image": "https://media1.thrillophilia.com/filestore/4tvixb9httxt0dlpsvvleqb7v4ro_15214422678_3bfd08b2ab_b.jpg?w=auto&h=600"
   },
   {
+    "id" : 2,
     "name": "Lux Ship",
     "passenger_capacity": 2000,
     "price": 1500,
@@ -20,6 +22,7 @@
     "image": "https://media1.thrillophilia.com/filestore/46emp16gjoykkwu7acqhq51se9yi_jmnn8vd04utd8atn08bf8g0ehzug_shutterstock_2223253639.jpg?w=auto&h=600"
   },
   {
+    "id" : 3,
     "name": "Another Ship",
     "passenger_capacity": 2000,
     "price": 1500,
@@ -30,6 +33,7 @@
     "image": "https://media1.thrillophilia.com/filestore/0t10n9p7zcxqsb5wdjm50z5996h2_shutterstock_776856442.jpg?w=auto&h=600"
   },
   {
+    "id" : 4,
     "name": "Luxury Cruise Ship",
     "passenger_capacity": 2000,
     "price": 1500,
@@ -37,6 +41,6 @@
       "available": true,
       "link": "https://example.com/book"
     },
-    "image": "https://media1.thrillophilia.com/filestore/mspxuaj2rkl4kn61qiison1hh7im_ndrkvr49svb0s1xve28dzmozahs5_IMG20230321183838_01-01.jpg?w=auto&h=600"
+    "image": "https://images.unsplash.com/photo-1522152302542-71a8e5172aa1?q=80&w=1908&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
   }
 ]

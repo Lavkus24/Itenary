@@ -1,18 +1,23 @@
-import React from 'react';
+import React  from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import './Navbar1.css'; // Import custom CSS file for styling
-// import  { Link } from '@mui/material';
+import './Navbar1.css'; 
 import { useNavigate } from 'react-router-dom';
+import { useSelector , useDispatch} from 'react-redux';
+import { signOut } from '../Redux/Authetication/AuthContextState';
 
 const Navbar = () => {
 
+    const isAuthenticated = useSelector(state => state.auth.isAuthenticated);
+    const dispatch = useDispatch();
     const navigate = useNavigate()
     
-    const handleClick = event => {
-        
-         
-        console.log("kg")
+    const handleClick = () => {
          navigate('/SignIn')
+    };
+    const handleSignOut = () => {
+        dispatch(signOut())
+        console.log('fgj')
+        navigate('/')
     };
 
     return (
@@ -29,7 +34,8 @@ const Navbar = () => {
                         </form>
                     </div>
                     <div>
-                        <button className='signin' onClick={handleClick} >sign in</button>
+                        {!isAuthenticated ?  (<button className='signin' onClick={handleClick}> Sign In</button>) :
+                         (<button className='signin' onClick={handleSignOut}> Sign Out</button>) }
                     </div>
                 </div>
             </div>
